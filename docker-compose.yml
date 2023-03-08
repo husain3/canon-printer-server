@@ -1,0 +1,9 @@
+version: '3.4'
+services:
+  canon-printer:
+    build:
+      context: .
+      network: host
+
+    tty: true
+    network_mode: host
