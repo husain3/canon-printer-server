@@ -27,7 +27,7 @@ RUN DEBIAN_FRONTEND=noninteractive TZ=America/Edmonton && cd /root/cnijfilter2-5
 RUN bash /root/cnijfilter2-5.40-1-deb.tar/cnijfilter2-5.40-1-deb/install.sh
 
 #Add the cron job
-RUN crontab -l | { cat; echo "*/2 * * * * bash /root/biweekly_colour_print.sh >> /root/cron.log 2>&1"; } | crontab -
+RUN crontab -l | { cat; echo "0 0 * * 0,3 bash /root/biweekly_colour_print.sh >> /root/cron.log 2>&1"; } | crontab -
 
 #Run the command on container startup
 ENTRYPOINT cron -f | tee /root/cron.log
