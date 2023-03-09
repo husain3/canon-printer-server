@@ -1,1 +1,1 @@
-Run this command: 'docker build --network=host .'
+Run this command: 'docker-compose up -d'
