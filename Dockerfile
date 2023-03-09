@@ -12,8 +12,9 @@ ADD cnijfilter2-5.40-1-deb.tar /root/cnijfilter2-5.40-1-deb.tar
 
 #Install sudo for script compatibility, set up timeinfo, and install cron
 ARG DEBIAN_FRONTEND=noninteractive
-ENV TZ=America/Edmonton
-RUN apt-get update -qqy && apt-get -y install tzdata sudo cron
+RUN apt-get update -qqy && apt-get -y install tzdata sudo cron enscript qpdf && \
+    ln -fs /usr/share/zoneinfo/America/Edmonton /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata
 
 #Install prerequisite packages
 RUN cd /root/cnijfilter2-5.40-1-deb.tar/cnijfilter2-5.40-1-deb/packages && \
