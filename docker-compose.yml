@@ -7,3 +7,4 @@ services:
 
     tty: true
     network_mode: host
+    restart: always
