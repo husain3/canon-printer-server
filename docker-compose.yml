@@ -4,7 +4,8 @@ services:
     build:
       context: .
       network: host
-
+    volumes:
+      - ~/canon-printer-server/cups-spool/:/cups-spool/
     tty: true
     stdin_open: true
     network_mode: host

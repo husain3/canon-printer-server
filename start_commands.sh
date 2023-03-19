@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cp -r /cups-spool/. /var/spool/cups/.
+
 /etc/init.d/dbus start
 /etc/init.d/cups start
 
