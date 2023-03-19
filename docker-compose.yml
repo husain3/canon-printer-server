@@ -6,5 +6,6 @@ services:
       network: host
 
     tty: true
+    stdin_open: true
     network_mode: host
     restart: always
