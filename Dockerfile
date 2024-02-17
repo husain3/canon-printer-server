@@ -60,6 +60,9 @@ RUN bash /root/cnijfilter2-5.40-1-deb.tar/cnijfilter2-5.40-1-deb/install.sh
 #Add the biweekly color print cron job
 RUN crontab -l | { cat; echo "0 0 * * 0,3 bash /root/biweekly_colour_print.sh >> /root/cron.log 2>&1"; } | crontab -
 
+#Perform head cleaning once a week
+RUN crontab -l | { cat; echo "0 0 * * 5 lp -i MB2700LAN-1 -H restart >> /root/cron.log 2>&1"; } | crontab -
+
 #Add rsync to save print job history outside docker container
 RUN crontab -l | { cat; echo "* * * * * rsync -a --chown nobody:nogroup --chmod 777 /var/spool/cups/ /cups-spool/ >> /root/cron.log 2>&1"; } | crontab -
 
