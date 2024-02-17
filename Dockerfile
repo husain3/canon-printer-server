@@ -52,7 +52,7 @@ RUN echo ${CUPSADMIN}:${CUPSPASSWORD} | chpasswd
 RUN usermod -aG lpadmin ${CUPSADMIN}
 
 #Install avahi-daemon to broadcast bonjour/airprint/zeroconf
-RUN apt install avahi-daemon
+#RUN apt install avahi-daemon
 
 #Run printer find-and-install script (install first printer found)
 RUN bash /root/cnijfilter2-5.40-1-deb.tar/cnijfilter2-5.40-1-deb/install.sh
@@ -62,6 +62,8 @@ RUN crontab -l | { cat; echo "0 0 * * 0,3 bash /root/biweekly_colour_print.sh >>
 
 #Add rsync to save print job history outside docker container
 RUN crontab -l | { cat; echo "* * * * * rsync -a --chown nobody:nogroup --chmod 777 /var/spool/cups/ /cups-spool/ >> /root/cron.log 2>&1"; } | crontab -
+
+#RUN crontab -l | { cat; echo "*/1 * * * * /usr/sbin/service avahi-daemon restart >> /root/cron.log 2>&1"; } | crontab -
 
 #Run the command on container startup
 ENTRYPOINT /root/start_commands.sh
